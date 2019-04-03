@@ -2,6 +2,10 @@ package cn.sd.jrz.jtool.function;
 
 import java.util.function.Supplier;
 
+/**
+ * @author JRZ
+ * @since 1.0
+ */
 public class JrzCatch {
     private JrzCatch() {
     }
