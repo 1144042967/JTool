@@ -185,6 +185,12 @@ public class ByteList implements RandomAccess, Cloneable, Serializable {
         return indexOf(bit) >= 0;
     }
 
+    /**
+     * 返回 bit 元素第一次出现的位置，如果未找到，返回 -1
+     *
+     * @param bit 特殊的元素
+     * @return 第一次出现的位置
+     */
     public int indexOf(byte bit) {
         for (int i = 0; i < size; i++) {
             if (bit == elementData[i]) {
@@ -194,7 +200,43 @@ public class ByteList implements RandomAccess, Cloneable, Serializable {
         return -1;
     }
 
+    /**
+     * 返回 bit 元素最后一次出现的位置，如果未找到，返回-1
+     *
+     * @param bit 特殊的元素
+     * @return 最后一次出现的位置
+     */
+    public int lastIndexOf(byte bit) {
+        for (int i = size - 1; i >= 0; i--) {
+            if (bit == elementData[i]) {
+                return i;
+            }
+        }
+        return -1;
+    }
 
+    /**
+     * 深复制
+     *
+     * @return 一个 <tt>ByteList</tt> 实例的复制
+     */
+    @Override
+    public Object clone() {
+        try {
+            ByteList v = (ByteList) super.clone();
+            v.elementData = Arrays.copyOf(elementData, size);
+            v.modCount = 0;
+            return v;
+        } catch (CloneNotSupportedException e) {
+            throw new InternalError(e);
+        }
+    }
+
+    /**
+     * 返回一个列表中按按序元素的数组
+     *
+     * @return 列表中按按序元素的数组
+     */
     public byte[] toArray() {
         return Arrays.copyOf(elementData, size);
     }
