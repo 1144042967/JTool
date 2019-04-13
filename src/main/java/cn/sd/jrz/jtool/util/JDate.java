@@ -1,4 +1,4 @@
-package cn.sd.jrz.jtool.immutable;
+package cn.sd.jrz.jtool.util;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -13,14 +13,14 @@ import java.util.Objects;
  * @author JRZ
  * @since 1.0
  */
-public final class JrzDate {
+public final class JDate {
     private final Instant date;
 
-    public static JrzDate of(String date) {
+    public static JDate of(String date) {
         return of(date, "yyyy-MM-dd HH:mm:ss");
     }
 
-    public static JrzDate of(String date, String format) {
+    public static JDate of(String date, String format) {
         SimpleDateFormat dateFormat = new SimpleDateFormat(format);
         Date d;
         try {
@@ -31,26 +31,26 @@ public final class JrzDate {
         if (d == null) {
             return null;
         }
-        return new JrzDate(d);
+        return new JDate(d);
     }
 
-    public static JrzDate of(int year, int month, int day, int hour, int minute, int second) {
-        return new JrzDate(LocalDateTime.of(year, month, day, hour, minute, second));
+    public static JDate of(int year, int month, int day, int hour, int minute, int second) {
+        return new JDate(LocalDateTime.of(year, month, day, hour, minute, second));
     }
 
-    public JrzDate() {
+    public JDate() {
         this.date = new Date().toInstant();
     }
 
-    public JrzDate(Date date) {
+    public JDate(Date date) {
         this.date = date.toInstant();
     }
 
-    public JrzDate(Calendar calendar) {
+    public JDate(Calendar calendar) {
         this.date = calendar.getTime().toInstant();
     }
 
-    public JrzDate(LocalDateTime localDateTime) {
+    public JDate(LocalDateTime localDateTime) {
         this.date = localDateTime.atZone(ZoneId.systemDefault()).toInstant();
     }
 
@@ -68,28 +68,28 @@ public final class JrzDate {
         return instance;
     }
 
-    public final JrzDate addSeconds(long seconds) {
-        return new JrzDate(toLocalDateTime().plusSeconds(seconds));
+    public final JDate addSeconds(long seconds) {
+        return new JDate(toLocalDateTime().plusSeconds(seconds));
     }
 
-    public final JrzDate addMinutes(long minutes) {
-        return new JrzDate(toLocalDateTime().plusMinutes(minutes));
+    public final JDate addMinutes(long minutes) {
+        return new JDate(toLocalDateTime().plusMinutes(minutes));
     }
 
-    public final JrzDate addHours(long hours) {
-        return new JrzDate(toLocalDateTime().plusHours(hours));
+    public final JDate addHours(long hours) {
+        return new JDate(toLocalDateTime().plusHours(hours));
     }
 
-    public final JrzDate addDays(long days) {
-        return new JrzDate(toLocalDateTime().plusDays(days));
+    public final JDate addDays(long days) {
+        return new JDate(toLocalDateTime().plusDays(days));
     }
 
-    public final JrzDate addMonths(long months) {
-        return new JrzDate(toLocalDateTime().plusMonths(months));
+    public final JDate addMonths(long months) {
+        return new JDate(toLocalDateTime().plusMonths(months));
     }
 
-    public final JrzDate addYears(long years) {
-        return new JrzDate(toLocalDateTime().plusYears(years));
+    public final JDate addYears(long years) {
+        return new JDate(toLocalDateTime().plusYears(years));
     }
 
     public final int second() {
@@ -116,36 +116,36 @@ public final class JrzDate {
         return toLocalDateTime().getYear();
     }
 
-    public final boolean isBefore(JrzDate jrzDate) {
-        return toLocalDateTime().isBefore(jrzDate.toLocalDateTime());
+    public final boolean isBefore(JDate jDate) {
+        return toLocalDateTime().isBefore(jDate.toLocalDateTime());
     }
 
     public final boolean isBefore(Date date) {
-        return isBefore(new JrzDate(date));
+        return isBefore(new JDate(date));
     }
 
     public final boolean isBefore(LocalDateTime localDateTime) {
-        return isBefore(new JrzDate(localDateTime));
+        return isBefore(new JDate(localDateTime));
     }
 
     public final boolean isBefore(Calendar calendar) {
-        return isBefore(new JrzDate(calendar));
+        return isBefore(new JDate(calendar));
     }
 
-    public final boolean isAfter(JrzDate jrzDate) {
-        return toLocalDateTime().isAfter(jrzDate.toLocalDateTime());
+    public final boolean isAfter(JDate jDate) {
+        return toLocalDateTime().isAfter(jDate.toLocalDateTime());
     }
 
     public final boolean isAfter(Date date) {
-        return isAfter(new JrzDate(date));
+        return isAfter(new JDate(date));
     }
 
     public final boolean isAfter(LocalDateTime localDateTime) {
-        return isAfter(new JrzDate(localDateTime));
+        return isAfter(new JDate(localDateTime));
     }
 
     public final boolean isAfter(Calendar calendar) {
-        return isAfter(new JrzDate(calendar));
+        return isAfter(new JDate(calendar));
     }
 
     public final long currentTimeMillis() {
@@ -166,8 +166,8 @@ public final class JrzDate {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        JrzDate jrzDate = (JrzDate) o;
-        return Objects.equals(date, jrzDate.date);
+        JDate jDate = (JDate) o;
+        return Objects.equals(date, jDate.date);
     }
 
     @Override

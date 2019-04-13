@@ -1,5 +1,10 @@
 package cn.sd.jrz.jtool;
 
+import akka.actor.AbstractActor;
+import akka.actor.ActorRef;
+import akka.actor.ActorSystem;
+import akka.actor.Props;
+import cn.sd.jrz.jtool.exception.Catch;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -19,5 +24,29 @@ public class OtherTest {
         list.add(1, "temp");
         list.add(0, "temp2");
         System.out.println(list);
+    }
+
+    @Test
+    public void asynTest() {
+        ActorSystem system = ActorSystem.create();
+        for (int i = 0; i < 10000000; i++) {
+            ActorRef actorRef = system.actorOf(Props.create(SleepActor.class, SleepActor::new));
+            actorRef.tell(i, ActorRef.noSender());
+            // System.out.println("Tell: " + i);
+        }
+
+        Catch.run(() -> Thread.sleep(2000000));
+    }
+
+    public static class SleepActor extends AbstractActor {
+
+        @Override
+        public Receive createReceive() {
+            return receiveBuilder()
+                    .match(Integer.class, any -> {
+                        Thread.sleep((10000000 - any) / 3000);
+                        System.out.println("Index: " + any + "  " + Thread.currentThread().getName());
+                    }).build();
+        }
     }
 }
