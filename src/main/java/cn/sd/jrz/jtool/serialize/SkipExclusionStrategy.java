@@ -8,7 +8,7 @@ import com.google.gson.FieldAttributes;
  * Date: 2019-04-13
  * Time: 11:12
  */
-public class SkipExclusionStrategy implements ExclusionStrategy {
+class SkipExclusionStrategy implements ExclusionStrategy {
     @Override
     public boolean shouldSkipField(FieldAttributes f) {
         Skip annotation = f.getAnnotation(Skip.class);

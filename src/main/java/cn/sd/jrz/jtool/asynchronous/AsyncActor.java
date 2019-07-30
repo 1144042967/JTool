@@ -4,8 +4,8 @@ import akka.actor.AbstractActor;
 import akka.actor.ActorRef;
 import akka.actor.PoisonPill;
 import akka.actor.Props;
-import cn.sd.jrz.jtool.function.JRunnable;
-import cn.sd.jrz.jtool.function.JSupplier;
+import cn.sd.jrz.jtool.function.exception.JRunnable;
+import cn.sd.jrz.jtool.function.exception.JSupplier;
 
 /**
  * @author 江荣展

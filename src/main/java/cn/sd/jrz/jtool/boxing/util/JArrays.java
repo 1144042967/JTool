@@ -1,6 +1,6 @@
 package cn.sd.jrz.jtool.boxing.util;
 
-import cn.sd.jrz.jtool.boxing.number.*;
+import cn.sd.jrz.jtool.boxing.primitive.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,6 +41,15 @@ public class JArrays {
         ArrayList<JInt> list = new ArrayList<>(a.length);
         for (int i : a) {
             list.add(new JInt(i));
+        }
+        return list;
+    }
+
+    public static List<JLong> asJList(long... a) {
+        Objects.requireNonNull(a);
+        ArrayList<JLong> list = new ArrayList<>(a.length);
+        for (long i : a) {
+            list.add(new JLong(i));
         }
         return list;
     }

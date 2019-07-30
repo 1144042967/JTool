@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.TypeAdapterFactory;
 import com.google.gson.internal.bind.ObjectTypeAdapter;
+import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Field;
 import java.util.Collections;
@@ -53,12 +54,13 @@ public class Serialize {
         return GSON.toJson(o);
     }
 
-    public static <T> T fromJson(String json, Type<T> type) {
+    public static <T> T fromJson(String json, TypeToken<T> type) {
         return GSON.fromJson(json, type.getType());
     }
 
     public static Map<String, Object> fromJson(String json) {
-        return GSON.fromJson(json, new Type<Map<String, Object>>().getType());
+        return GSON.fromJson(json, new TypeToken<Map<String, Object>>() {
+        }.getType());
     }
 
     public static <T> T fromJson(String json, Class<T> cls) {

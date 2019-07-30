@@ -1,6 +1,6 @@
 package cn.sd.jrz.jtool.asynchronous;
 
-import cn.sd.jrz.jtool.exception.Catch;
+import cn.sd.jrz.jtool.function.exception.JRunnable;
 import org.junit.Test;
 
 /**
@@ -18,7 +18,7 @@ public class AsyncTest {
             System.out.println("2");
         });
 
-        Catch.run(() -> Thread.sleep(3 * 1000));
+        JRunnable.run(() -> Thread.sleep(3 * 1000));
     }
 
     @Test
@@ -49,7 +49,7 @@ public class AsyncTest {
             System.out.println("1");
             return "123";
         });
-        Catch.run(() -> Thread.sleep(2 * 1000));
+        JRunnable.run(() -> Thread.sleep(2 * 1000));
         String result = box.await(3);
         System.out.println(result);
     }
@@ -60,7 +60,7 @@ public class AsyncTest {
             System.out.println("1");
             return "123";
         });
-        Catch.run(() -> Thread.sleep(2 * 1000));
+        JRunnable.run(() -> Thread.sleep(2 * 1000));
         String result = box.await();
         System.out.println(result);
     }

@@ -86,8 +86,8 @@ public class SerializeTest {
     @Test
     public void fromTest(){
         String s = "{\"aaa\":\"123\"}";
-        Object o1 = new Gson().fromJson(s, new Type<HashMap<String, Object>>().getType());
-        Object o2 = new Gson().fromJson(s, new Type<Map<String, Object>>().getType());
+        Object o1 = new Gson().fromJson(s, new TypeToken<HashMap<String, Object>>(){}.getType());
+        Object o2 = new Gson().fromJson(s, new TypeToken<Map<String, Object>>(){}.getType());
         Object o3 = new Gson().fromJson(s, new TypeToken<Map<String, Object>>(){}.getType());
         Object o4 = new Gson().fromJson(s, HashMap.class);
         System.out.println(o1.getClass());

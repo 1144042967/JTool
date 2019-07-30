@@ -3,8 +3,8 @@ package cn.sd.jrz.jtool.asynchronous;
 import akka.actor.AbstractActor;
 import akka.actor.PoisonPill;
 import akka.actor.Props;
-import cn.sd.jrz.jtool.boxing.tuple.JObject;
-import cn.sd.jrz.jtool.exception.Catch;
+import cn.sd.jrz.jtool.boxing.primitive.JObject;
+import cn.sd.jrz.jtool.function.exception.JRunnable;
 
 /**
  * @author 江荣展
@@ -31,6 +31,12 @@ public class JBox<T> extends AbstractActor {
         }).build();
     }
 
+    /**
+     * 等待指定时间后返回结果，可多次调用
+     *
+     * @param second 指定时间
+     * @return 执行结果
+     */
     public T await(long second) {
         long waitTime = second * 1000;
         long startTime = System.currentTimeMillis();
@@ -40,13 +46,21 @@ public class JBox<T> extends AbstractActor {
                     //noinspection unchecked
                     return (T) result;
                 } finally {
-                    getSelf().tell(PoisonPill.getInstance(), getSelf());
+                    try {
+                        getSelf().tell(PoisonPill.getInstance(), getSelf());
+                    } catch (Exception ignored) {
+                    }
                 }
             }
-            Catch.run(() -> Thread.sleep(100));
+            JRunnable.run(() -> Thread.sleep(100));
         }
     }
 
+    /**
+     * 等待20秒后返回结果，可多次调用
+     *
+     * @return 执行结果
+     */
     public T await() {
         return await(20);
     }

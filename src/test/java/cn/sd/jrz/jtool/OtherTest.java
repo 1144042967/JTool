@@ -4,7 +4,7 @@ import akka.actor.AbstractActor;
 import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
 import akka.actor.Props;
-import cn.sd.jrz.jtool.exception.Catch;
+import cn.sd.jrz.jtool.function.exception.JRunnable;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -35,7 +35,7 @@ public class OtherTest {
             // System.out.println("Tell: " + i);
         }
 
-        Catch.run(() -> Thread.sleep(2000000));
+        JRunnable.run(() -> Thread.sleep(2000000));
     }
 
     public static class SleepActor extends AbstractActor {

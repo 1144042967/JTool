@@ -20,8 +20,8 @@ import java.util.Map;
  * Date: 2019-04-13
  * Time: 13:01
  */
-public class MapTypeAdapter extends TypeAdapter<Object> {
-    public static final TypeAdapterFactory FACTORY = new TypeAdapterFactory() {
+class MapTypeAdapter extends TypeAdapter<Object> {
+    static final TypeAdapterFactory FACTORY = new TypeAdapterFactory() {
         @SuppressWarnings("unchecked")
         @Override
         public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
