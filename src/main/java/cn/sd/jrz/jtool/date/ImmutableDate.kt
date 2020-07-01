@@ -10,19 +10,19 @@ import java.util.*
  * @author 江荣展
  * @date 2020/6/30
  */
-class JDate(private val date: Instant) {
+class ImmutableDate(private val date: Instant) {
 
     companion object {
-        fun of(date: String, format: String = "yyyy-MM-dd HH:mm:ss"): JDate? {
+        fun of(date: String, format: String = "yyyy-MM-dd HH:mm:ss"): ImmutableDate? {
             return try {
-                JDate(SimpleDateFormat(format).parse(date))
+                ImmutableDate(SimpleDateFormat(format).parse(date))
             } catch (e: Exception) {
                 null
             }
         }
 
-        fun of(year: Int, month: Int, day: Int, hour: Int, minute: Int, second: Int): JDate? {
-            return JDate(LocalDateTime.of(year, month, day, hour, minute, second))
+        fun of(year: Int, month: Int, day: Int, hour: Int, minute: Int, second: Int): ImmutableDate? {
+            return ImmutableDate(LocalDateTime.of(year, month, day, hour, minute, second))
         }
     }
 
@@ -40,17 +40,17 @@ class JDate(private val date: Instant) {
 
     fun toLocalDateTime(): LocalDateTime = LocalDateTime.ofInstant(date, ZoneId.systemDefault())
 
-    fun addSeconds(seconds: Long) = JDate(toLocalDateTime().plusSeconds(seconds))
+    fun addSeconds(seconds: Long) = ImmutableDate(toLocalDateTime().plusSeconds(seconds))
 
-    fun addMinutes(minutes: Long) = JDate(toLocalDateTime().plusMinutes(minutes))
+    fun addMinutes(minutes: Long) = ImmutableDate(toLocalDateTime().plusMinutes(minutes))
 
-    fun addHours(hours: Long) = JDate(toLocalDateTime().plusHours(hours))
+    fun addHours(hours: Long) = ImmutableDate(toLocalDateTime().plusHours(hours))
 
-    fun addDays(days: Long) = JDate(toLocalDateTime().plusDays(days))
+    fun addDays(days: Long) = ImmutableDate(toLocalDateTime().plusDays(days))
 
-    fun addMonths(months: Long) = JDate(toLocalDateTime().plusMonths(months))
+    fun addMonths(months: Long) = ImmutableDate(toLocalDateTime().plusMonths(months))
 
-    fun addYears(years: Long) = JDate(toLocalDateTime().plusYears(years))
+    fun addYears(years: Long) = ImmutableDate(toLocalDateTime().plusYears(years))
 
     val second get() = toLocalDateTime().second
 
@@ -64,26 +64,26 @@ class JDate(private val date: Instant) {
 
     val year get() = toLocalDateTime().year
 
-    fun isBefore(jDate: JDate) = toLocalDateTime().isBefore(jDate.toLocalDateTime())
+    fun isBefore(immutableDate: ImmutableDate) = toLocalDateTime().isBefore(immutableDate.toLocalDateTime())
 
-    fun isBefore(date: Date) = isBefore(JDate(date))
+    fun isBefore(date: Date) = isBefore(ImmutableDate(date))
 
-    fun isBefore(localDateTime: LocalDateTime) = isBefore(JDate(localDateTime))
+    fun isBefore(localDateTime: LocalDateTime) = isBefore(ImmutableDate(localDateTime))
 
-    fun isBefore(calendar: Calendar) = isBefore(JDate(calendar))
+    fun isBefore(calendar: Calendar) = isBefore(ImmutableDate(calendar))
 
-    fun isAfter(jDate: JDate) = toLocalDateTime().isAfter(jDate.toLocalDateTime())
+    fun isAfter(immutableDate: ImmutableDate) = toLocalDateTime().isAfter(immutableDate.toLocalDateTime())
 
-    fun isAfter(date: Date) = isAfter(JDate(date))
+    fun isAfter(date: Date) = isAfter(ImmutableDate(date))
 
-    fun isAfter(localDateTime: LocalDateTime) = isAfter(JDate(localDateTime))
+    fun isAfter(localDateTime: LocalDateTime) = isAfter(ImmutableDate(localDateTime))
 
-    fun isAfter(calendar: Calendar) = isAfter(JDate(calendar))
+    fun isAfter(calendar: Calendar) = isAfter(ImmutableDate(calendar))
 
-    operator fun compareTo(jDate: JDate): Int {
+    operator fun compareTo(immutableDate: ImmutableDate): Int {
         return when {
-            isBefore(jDate) -> -1
-            isAfter(jDate) -> 1
+            isBefore(immutableDate) -> -1
+            isAfter(immutableDate) -> 1
             else -> 0
         }
     }
@@ -119,7 +119,7 @@ class JDate(private val date: Instant) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
-        other as JDate
+        other as ImmutableDate
         if (date != other.date) return false
         return true
     }

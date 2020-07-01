@@ -8,120 +8,120 @@ import java.util.*
  * @author 江荣展
  * @date 2020/6/30
  */
-class JDateTest {
+class ImmutableDateTest {
 
     @Test
     fun of() {
-        println(JDate.of("2014-05-06 13:00:00"))
-        println(JDate.of("abc"))
-        println(JDate.of("2005年9月15日 04时41分20秒", "yyyy年MM月dd日 HH时mm分ss秒"))
-        println(JDate.of(2014, 5, 6, 13, 0, 0))
+        println(ImmutableDate.of("2014-05-06 13:00:00"))
+        println(ImmutableDate.of("abc"))
+        println(ImmutableDate.of("2005年9月15日 04时41分20秒", "yyyy年MM月dd日 HH时mm分ss秒"))
+        println(ImmutableDate.of(2014, 5, 6, 13, 0, 0))
     }
 
     @Test
     fun constructor() {
-        println(JDate())
-        println(JDate(Date()))
-        println(JDate(Calendar.getInstance()))
-        println(JDate(LocalDateTime.now()))
+        println(ImmutableDate())
+        println(ImmutableDate(Date()))
+        println(ImmutableDate(Calendar.getInstance()))
+        println(ImmutableDate(LocalDateTime.now()))
     }
 
     @Test
     fun toDate() {
-        val date = JDate()
+        val date = ImmutableDate()
         println(date)
         println(date.toDate())
     }
 
     @Test
     fun toCalendar() {
-        val date = JDate()
+        val date = ImmutableDate()
         println(date)
         println(date.toCalendar())
     }
 
     @Test
     fun toLocalDateTime() {
-        val date = JDate()
+        val date = ImmutableDate()
         println(date)
         println(date.toLocalDateTime())
     }
 
     @Test
     fun addSeconds() {
-        val date = JDate()
+        val date = ImmutableDate()
         println(date)
         println(date.addSeconds(1))
     }
 
     @Test
     fun addMinutes() {
-        val date = JDate()
+        val date = ImmutableDate()
         println(date)
         println(date.addMinutes(1))
     }
 
     @Test
     fun addHours() {
-        val date = JDate()
+        val date = ImmutableDate()
         println(date)
         println(date.addHours(1))
     }
 
     @Test
     fun addDays() {
-        val date = JDate()
+        val date = ImmutableDate()
         println(date)
         println(date.addDays(1))
     }
 
     @Test
     fun addMonths() {
-        val date = JDate.of("2020-01-31 00:00:00")
+        val date = ImmutableDate.of("2020-01-31 00:00:00")
         println(date)
         println(date?.addMonths(1))
     }
 
     @Test
     fun addYears() {
-        val date = JDate()
+        val date = ImmutableDate()
         println(date)
         println(date.addYears(1))
     }
 
     @Test
     fun second() {
-        println(JDate().second)
+        println(ImmutableDate().second)
     }
 
     @Test
     fun minute() {
-        println(JDate().minute)
+        println(ImmutableDate().minute)
     }
 
     @Test
     fun hour() {
-        println(JDate().hour)
+        println(ImmutableDate().hour)
     }
 
     @Test
     fun day() {
-        println(JDate().day)
+        println(ImmutableDate().day)
     }
 
     @Test
     fun month() {
-        println(JDate().month)
+        println(ImmutableDate().month)
     }
 
     @Test
     fun year() {
-        println(JDate().year)
+        println(ImmutableDate().year)
     }
 
     @Test
     fun isBefore() {
-        val date = JDate()
+        val date = ImmutableDate()
         val tomorrow = date.addDays(1)
         val yesterday = date.addDays(-1)
         println(date.isBefore(tomorrow))
@@ -140,7 +140,7 @@ class JDateTest {
 
     @Test
     fun isAfter() {
-        val date = JDate()
+        val date = ImmutableDate()
         val tomorrow = date.addDays(1)
         val yesterday = date.addDays(-1)
         println(date.isAfter(tomorrow))
@@ -159,7 +159,7 @@ class JDateTest {
 
     @Test
     fun compareTo() {
-        val date = JDate()
+        val date = ImmutableDate()
         val tomorrow = date.addDays(1)
         val yesterday = date.addDays(-1)
         println(date > tomorrow)
@@ -190,17 +190,17 @@ class JDateTest {
 
     @Test
     fun millis() {
-        println(JDate().millis)
+        println(ImmutableDate().millis)
     }
 
     @Test
     fun testToString() {
-        println(JDate())
+        println(ImmutableDate())
     }
 
     @Test
     fun testEquals() {
-        val date = JDate()
+        val date = ImmutableDate()
         val tomorrow = date.addDays(1)
         val now = tomorrow.addDays(-1)
         println(date == tomorrow)
@@ -209,9 +209,9 @@ class JDateTest {
 
     @Test
     fun testHashCode() {
-        val jDate = JDate()
+        val jDate = ImmutableDate()
         println(jDate.hashCode())
         println(jDate.hashCode())
-        println(JDate().hashCode())
+        println(ImmutableDate().hashCode())
     }
 }
