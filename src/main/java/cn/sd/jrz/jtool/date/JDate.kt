@@ -1,6 +1,5 @@
 package cn.sd.jrz.jtool.date
 
-import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.time.Instant
 import java.time.LocalDateTime
@@ -15,14 +14,11 @@ class JDate(private val date: Instant) {
 
     companion object {
         fun of(date: String, format: String = "yyyy-MM-dd HH:mm:ss"): JDate? {
-            val dateFormat = SimpleDateFormat(format)
-            val d: Date?
-            d = try {
-                dateFormat.parse(date)
-            } catch (e: ParseException) {
+            return try {
+                JDate(SimpleDateFormat(format).parse(date))
+            } catch (e: Exception) {
                 null
             }
-            return d?.let { JDate(d) }
         }
 
         fun of(year: Int, month: Int, day: Int, hour: Int, minute: Int, second: Int): JDate? {
@@ -30,13 +26,13 @@ class JDate(private val date: Instant) {
         }
     }
 
-    constructor() : this(date = Date().toInstant())
+    constructor() : this(Date().toInstant())
 
-    constructor(date: Date) : this(date = date.toInstant())
+    constructor(date: Date) : this(date.toInstant())
 
-    constructor(calendar: Calendar) : this(date = calendar.time.toInstant())
+    constructor(calendar: Calendar) : this(calendar.time.toInstant())
 
-    constructor(localDateTime: LocalDateTime) : this(date = localDateTime.atZone(ZoneId.systemDefault()).toInstant())
+    constructor(localDateTime: LocalDateTime) : this(localDateTime.atZone(ZoneId.systemDefault()).toInstant())
 
     fun toDate(): Date = Date.from(date)
 
