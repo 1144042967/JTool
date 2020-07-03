@@ -6,6 +6,7 @@ import cn.sd.jrz.jtool.function.exception.JRunnable;
 import cn.sd.jrz.jtool.function.exception.JSupplier;
 import cn.sd.jrz.jtool.proxy.model.DuckChip;
 import cn.sd.jrz.jtool.proxy.model.DuckInvokeParams;
+import kotlin.Unit;
 import net.sf.cglib.proxy.Enhancer;
 import net.sf.cglib.proxy.MethodInterceptor;
 import net.sf.cglib.proxy.MethodProxy;
@@ -75,11 +76,23 @@ public class ProxyBuilder {
         @Override
         public Object intercept(Object o, Method method, Object[] args, MethodProxy methodProxy) {
             if (args == null || args.length == 0) {
-                Async.run(() -> method.invoke(source));
+                Async.Companion.running(() -> {
+                    try {
+                        method.invoke(source);
+                    } catch (IllegalAccessException | InvocationTargetException e) {
+                        e.printStackTrace();
+                    }
+                });
             } else {
-                Async.run(() -> method.invoke(source, args));
+                Async.Companion.running(() -> {
+                    try {
+                        method.invoke(source, args);
+                    } catch (IllegalAccessException | InvocationTargetException e) {
+                        e.printStackTrace();
+                    }
+                });
             }
-            return null;
+            return Unit.INSTANCE;
         }
     }
 

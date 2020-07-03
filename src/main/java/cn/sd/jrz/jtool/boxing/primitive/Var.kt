@@ -6,7 +6,7 @@ import java.math.BigDecimal
  * @author 江荣展
  * @date 2020/7/1
  */
-abstract class Var<T>(open var value: T) {
+open class Var<T>(open var value: T) {
     override fun toString(): String {
         return value.toString()
     }
@@ -28,4 +28,4 @@ class VarLong(override var value: Long = 0) : Var<Long>(value)
 class VarFloat(override var value: Float = 0F) : Var<Float>(value)
 class VarDouble(override var value: Double = 0.0) : Var<Double>(value)
 class VarDecimal(override var value: BigDecimal = BigDecimal(0)) : Var<BigDecimal>(value)
-class VarAny(override var value: Any? = null) : Var<Any?>(value)
+class VarObject<T>(override var value: T? = null) : Var<T?>(value)
